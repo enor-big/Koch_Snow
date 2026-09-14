@@ -25,7 +25,18 @@ void KochWidget::drawKochSegment(QPainter &painter, QPointF A, QPointF B){
         A.x() + 2 * (B.x() - A.x()) / 3,
         A.y() + 2 * (B.y() - A.y()) / 3
         );
+
+    double dx=E.x() - D.x();
+    double dy=E.y() - D.y();
+    double rotatedX=dx/2-dy*sqrt(3)/2;
+    double rotatedY=dx*sqrt(3)/2+dy/2;
+
+    QPointF F(
+        D.x()+rotatedX,
+        D.y()+rotatedY
+        );
     painter.drawLine(A, D);
-    painter.drawLine(D, E);
+    painter.drawLine(D, F);
+    painter.drawLine(F, E);
     painter.drawLine(E, B);
 }
