@@ -10,7 +10,7 @@ public:
     explicit KochWidget(QWidget *parent = nullptr);
 protected:
     void paintEvent(QPaintEvent *event) override;
-    void drawKochSegment(QPainter &painter, QPointF A, QPointF B);
+    void drawKochSegment(QPainter &painter, QPointF A, QPointF B, int depth);
 signals:
 };
 
