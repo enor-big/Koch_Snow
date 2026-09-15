@@ -12,8 +12,10 @@ public:
 protected:
     void paintEvent(QPaintEvent *event) override;
     void drawKochSegment(QPainter &painter, QPointF A, QPointF B, int depth);
+    void wheelEvent(QWheelEvent *event) override;
 private:
     int depth=0;
+    double scale = 1.0;
 signals:
 };
 

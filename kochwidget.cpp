@@ -1,6 +1,7 @@
 #include "kochwidget.h"
 #include "QPainter"
 #include <cmath>
+#include <QWheelEvent>
 
 KochWidget::KochWidget(QWidget *parent)
     : QWidget{parent}
@@ -8,6 +9,7 @@ KochWidget::KochWidget(QWidget *parent)
 
 void KochWidget::paintEvent(QPaintEvent *event){
     QPainter painter(this);
+    painter.scale(scale, scale);
     QPointF A(200, 350);
     QPointF B(600, 350);
     QPointF C(400, 350 - 200 * sqrt(3));
@@ -49,5 +51,15 @@ void KochWidget::drawKochSegment(QPainter &painter, QPointF A, QPointF B, int de
 }
 void KochWidget::setDepth(int newDepth){
     depth=newDepth;
+    update();
+}
+
+void KochWidget::wheelEvent(QWheelEvent *event)
+{
+    if (event->angleDelta().y() > 0)
+        scale *= 1.1;
+    else
+        scale /= 1.1;
+
     update();
 }
