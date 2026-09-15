@@ -8,12 +8,12 @@ KochWidget::KochWidget(QWidget *parent)
 
 void KochWidget::paintEvent(QPaintEvent *event){
     QPainter painter(this);
-    QPointF A(200, 400);
-    QPointF B(600, 400);
-    QPointF C(400, 400 - 200 * sqrt(3));
-    drawKochSegment(painter, A, B, 2);
-    drawKochSegment(painter, B, C, 2);
-    drawKochSegment(painter, C, A, 2);
+    QPointF A(200, 350);
+    QPointF B(600, 350);
+    QPointF C(400, 350 - 200 * sqrt(3));
+    drawKochSegment(painter, A, B, depth);
+    drawKochSegment(painter, B, C, depth);
+    drawKochSegment(painter, C, A, depth);
 }
 
 void KochWidget::drawKochSegment(QPainter &painter, QPointF A, QPointF B, int depth){
@@ -46,4 +46,8 @@ void KochWidget::drawKochSegment(QPainter &painter, QPointF A, QPointF B, int de
         drawKochSegment(painter, E, B, depth - 1);
     }
 
+}
+void KochWidget::setDepth(int newDepth){
+    depth=newDepth;
+    update();
 }

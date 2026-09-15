@@ -16,6 +16,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "kochwidget.h"
 
@@ -25,6 +26,8 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
+    QWidget *layoutWidget;
+    QVBoxLayout *verticalLayout;
     QSlider *horizontalSlider;
     KochWidget *widget;
     QLabel *label;
@@ -35,23 +38,33 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(800, 600);
+        MainWindow->resize(800, 602);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        horizontalSlider = new QSlider(centralwidget);
+        layoutWidget = new QWidget(centralwidget);
+        layoutWidget->setObjectName("layoutWidget");
+        layoutWidget->setGeometry(QRect(11, 10, 781, 561));
+        verticalLayout = new QVBoxLayout(layoutWidget);
+        verticalLayout->setObjectName("verticalLayout");
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        horizontalSlider = new QSlider(layoutWidget);
         horizontalSlider->setObjectName("horizontalSlider");
-        horizontalSlider->setGeometry(QRect(310, 500, 241, 18));
-        horizontalSlider->setMinimum(10);
-        horizontalSlider->setMaximum(200);
-        horizontalSlider->setValue(100);
+        horizontalSlider->setMinimum(0);
+        horizontalSlider->setMaximum(10);
+        horizontalSlider->setValue(0);
         horizontalSlider->setOrientation(Qt::Orientation::Horizontal);
-        widget = new KochWidget(centralwidget);
+
+        verticalLayout->addWidget(horizontalSlider);
+
+        widget = new KochWidget(layoutWidget);
         widget->setObjectName("widget");
-        widget->setGeometry(QRect(0, 0, 801, 471));
         widget->setMinimumSize(QSize(600, 400));
-        label = new QLabel(centralwidget);
+        label = new QLabel(widget);
         label->setObjectName("label");
-        label->setGeometry(QRect(140, 490, 54, 17));
+        label->setGeometry(QRect(0, -30, 211, 81));
+
+        verticalLayout->addWidget(widget);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -69,7 +82,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "\320\234\320\260\321\201\321\210\321\202\320\260\320\261", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "\320\223\320\273\321\203\320\261\320\270\320\275\320\260", nullptr));
     } // retranslateUi
 
 };
